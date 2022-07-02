@@ -306,6 +306,47 @@ struct list_head *mergesort(struct list_head *head)
  * No effect if q is NULL or empty. In addition, if q has only one
  * element, do nothing.
  */
+<<<<<<< HEAD
+=======
+ struct list_head *mergeTwoLists(struct list_head *l1, struct list_head *l2)
+{
+    struct list_head *head = NULL, **ptr = &head, **node;
+
+    for (node = NULL; l1 && l2; *node = (*node)->next) {
+        node = (strcmp(list_entry(l1, element_t, list)->value,
+                       list_entry(l2, element_t, list)->value) < 0)
+                   ? &l1
+                   : &l2;
+        *ptr = *node;
+        ptr = &(*ptr)->next;
+    }
+
+    *ptr = (struct list_head *) ((u_int64_t) l1 | (u_int64_t) l2);
+
+    return head;
+}
+
+struct list_head *mergesort(struct list_head *head)
+{
+    if (!head->next) {
+        return head;
+    }
+    struct list_head *fast = head, *slow = head, *mid;
+    while (true) {
+        if (!fast || !fast->next)
+            break;
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+
+    mid = slow;
+    slow->prev->next = NULL;
+
+    struct list_head *l1 = mergesort(head), *l2 = mergesort(mid);
+    return mergeTwoLists(l1, l2);
+}
+
+>>>>>>> 2d4945f (Implement function q_sort)
 void q_sort(struct list_head *head)
 {
     if (!head || list_empty(head) || list_is_singular(head)) {
