@@ -258,6 +258,7 @@ void q_reverse(struct list_head *head)
         list_move(node, head);
     }
 }
+<<<<<<< HEAD
 
 
 struct list_head *mergeTwoLists(struct list_head *l1, struct list_head *l2)
@@ -297,6 +298,8 @@ struct list_head *mergesort(struct list_head *head)
     struct list_head *l1 = mergesort(head), *l2 = mergesort(mid);
     return mergeTwoLists(l1, l2);
 }
+=======
+>>>>>>> 7e1ed43 (Implement function q_reverse)
 
 /*
  * Sort elements of queue in ascending order
